@@ -1,0 +1,24 @@
+---
+title: 'Resumen: Lectura 1'
+author: "Diego Gorostieta"
+date: "9/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+$\color{blue}{DEMOGRAFÍA}$
+
+
+Para entender qué es la demografía es primordial precisar los elementos que la conforman, los procesos que involucra, además de bosquejar las actividades que lleva a cabo. 
+
+La población es el objeto de estudio de la demografía; por población se entiende a un conjunto de individuos constituido de forma estable, ligado por vínculos de reproducción e identificado por características territoriales, políticas, jurídicas, étnicas o religiosas. Una población se definirá como tal si tiene continuidad en el tiempo y esta continuidad está asegurada por vínculos que ligan padres e hijos y garantiza la sucesión de generaciones.
+
+Es importante aclarar que los individuos son las unidades básicas de las poblaciones con atributos demográficos como: sexo, edad, estado civil, lugar de nacimiento y tanto la formación como la distribución de las poblaciones son derivaciones de la migración de los individuos.  Las poblaciones se diferencian por su estructura, ya sea por edad, sexo o estado civil y se llegan a extinguir a causa de la insuficiencia de natalidad ante mortalidad. 
+
+Una vez declarado lo afín con la población podemos concebir a la demografía como aquella ciencia que estudia los procesos que determinan la formación, la conservación y la desaparición de las poblaciones (fecundidad, migración y mortalidad). Dentro de la demografía lo biológico y lo social es de gran relevancia, pues la mayoría de los fenómenos demográficos son resultado de procesos biológicos y los cauces que toman los individuos se ven influenciados por el ambiente en el que se desarrollan. 
+
+Las familias se forman por fenómenos de nupcialidad, fecundidad y movilidad y se diluyen por disolución de matrimonio, muerte y movilidad. Estos fenómenos determinan rasgos demográficos, culturales, religiosos, entre otros y son conocidos como procesos de cohesión, agregación y repulsión.
+
+Finalmente, como un claro ejemplo de las tareas que la demografía desempeña tenemos el censo, una actividad que a través de datos de stock (tamaño de una población y sus características) se encarga de registrar la contabilización de todos los individuos de manera aislada sin que nadie sea descuidado y que cuenta con finalidades fiscales, militares y económicas. Cabe mencionar que la unidad de recogida, normalmente la familia, es la entidad de donde se recolectan los datos a través de instrumentos de recogida (cuestionarios) y dada la naturaleza restrictiva de la actividad se pueden presentar errores de precisión por lo que es recomendable que los datos adquieran validez oficial. 
