@@ -1,0 +1,15 @@
+install.packages("dplyr")
+require(dplyr)
+mundo <-as_tibble(read.csv("owid-covid-data.csv"))
+italia<-mundo%>%
+    as_tibble()%>%
+ filter(iso_code=="ITA") %>%
+mutate(acumulado=cumsum(new_cases))%>%
+filter(between (acumulado,500000,200000))
+
+max(italia$new_cases)
+
+nicaragua<-mundo%>%
+  as_tibble()%>%
+  filter(iso_code=="NIC") 
+ 
