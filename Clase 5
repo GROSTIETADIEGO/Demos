@@ -1,0 +1,44 @@
+###########2020###########
+ent<-c("edomex","cdmx","chiap")
+nac<-c(184447,65703,98098)
+def<-c(131133,132751,38662)
+CN<-(nac-def)
+inmI<-c(62817,104629,60438)
+emiI<-c()
+inminternos<-c(5190562,1679063,174961)
+eminternos<-c(1344291,4955432,678362)
+CSi<-inminternos-eminternos
+
+
+
+
+## Interpolación y extrapolación 
+
+Despues de calcular la tasa de crecimiento exponencial, es decir, de r, con esta información se podría calcular la cantidad de población en un país, región dentro del periodo estimado de la tasa calculada. 
+
+Por ejemplo, si estimamos una tasa de crecimiento exponencial de la población en el peridod 2004 a 2011, nosotros podriamos calcular la cantidad de población dentro de ese periodo en cualquier tiempo a través del método de interpolación, si nosotros quisieramos calcular la población fuera de ese periodo, el método para ese claculo se llama extrapolación y se plantea de la siguiente manera: 
+
+Interpolación 
+
+$Población inicial_{30/06/2005}=1101318000$
+
+$Poblacion calculada_{31/12/2008}=1101318000*e^{0.01399829*3.5}=1156619654$
+
+$Población final_{30/06/2011}=1197813000$
+
+$r=0.01399829$
+
+$n=3.5$
+
+
+Extrapolación 
+
+$Población inicial_{30/06/2005}=1101318000$
+
+$Poblacion calculada_{01/04/2000}=1101318000*e^{0.01399829*-5.2439}=1023293575$
+
+$Población final_{30/06/2011}=1197813000$
+
+$r=0.01399829$
+
+$n=-5.2493$
