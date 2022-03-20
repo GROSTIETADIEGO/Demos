@@ -1,0 +1,92 @@
+## Ecuación compesadora
+
+La ecuación compensadora es uno de los elementos principales de la demografía y se plantea de la siguiente manera $P_{t+n}=P_t+N_{t -> t+n}-D_{t -> t+n}+I_{t -> t+n}-E_{t -> t+n}$
+
+\*Migración internacional
+
+$N: nacimiento$
+
+$D: defunciones$
+
+$I: inmigrantes$
+
+$E: emigrantes$
+
+$P_(t+n)-P_t=[N_(t -> t+n)-D_(t -> t+n)]+[I_(t -> t+n)-E_(t -> t+n)]$
+
+$CP=CN+CS$
+
+$Crecimiento Poblacional$, $Crecimiento Natural$, $Crecimiento Social$
+
+Ejemplo
+
+$Pob_{2004}=296410000$
+
+$Pob_{2005}=296410000$
+
+$N_{2004-2005}=4129000$
+
+$D_{2004-2005}=2425000$
+
+$I_{2004-2005}=1122000$
+
+$E_{2004-2005}=73000$
+
+$CP=296410000-296410000=2753000$
+
+$CN=4129000-2425000=1704000$
+
+$CS=1122000-73000=1049000$
+
+$P_{t+n}=P_t+N_{t -> t+n}-D_{t -> t+n}+I_{t -> t+n}-E_{t -> t+n}+\hat{I}_{t -> t+n}-\hat{E}_{t -> t+n}$
+
+Migración intenrnacinal e internacional
+
+$CP=CN+CS_I+\hat{CS}_I$
+
+La suma de la emigración interna con la inmigración interna es cero
+
+``` 
+install.packages("printr")
+require(printr)
+
+Entidades\<-c("Edomex", "Michoacan", "Chiapas", "Baja California", "Nuevo León", "Jalisco", "Sinaloa", "Guanajuato")
+
+CN\<-c(44441,32585,35065,6724,18518,2001,2629,3228)
+
+CSI\<-c(49607,44347,30486,9364,29314,1044,699,1940)
+
+CCSI\<-c(-12202,3381,7391,-2653,4996,174,-2393,1306)
+
+CP=CN+CSI+CCSI
+
+sum(CN) sum(CSI) sum(CCSI) sum(CP)
+
+Table<-data.frame(Entidades,CN,CSI,CCSI,CP)
+
+table(Table) 
+
+```
+
+
+
+## Tasas de crecimiento poblacional
+
+1) Tasa de crecimiento anual 
+
+$TCA=\frac{P_{t+1}-P_t}{P_t}$
+
+$TCA=\frac{2964100-293657000}{293657000}=0.009357$
+
+
+2) Tasa de crecimiento exponencial (Población)
+
+$TCE -> P_{t+n}=P_t*e^{r*n}$
+
+$P_t: población inicial$
+
+$r: tasa  de  crecimiento  exponencial$
+
+$n: número  de  años$
+
+
