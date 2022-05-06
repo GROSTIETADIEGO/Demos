@@ -1,0 +1,131 @@
+## Medidas sintéticas de la Fecundidad 
+
+Para plantear estas medidas tenemos que partir de algunos supuestos
+1) El grupo poblacional esta cerrado a la migración 
+2)El grupo esta basado en solo un año, es decir, las tasas o meiddas sintéticas que s eplantean solo se van arealizar para algunos años en específico 
+3) Las mujeres no se mueren o no existe mortalifdad femenina hasta que concluya su periodo fertil (45 años )
+
+Las medidas sintéticas son las siguientes
+
+Tasa General de Fecundidad
+TGrF: suma (tasas especificas de fecundidad)
+$TEF---TGrF=suma(TEF)$
+
+Tasa Bruta de Reproducción 
+$TBR=suma(TEF)*S$ 
+Donde S:= es la probabilidad de sobrevivencia de las mujeres 
+
+Tasa Neta de Reproducción 
+$TNR=suma(TEF)*S*PS$
+Donde PS:= es la probabilidad de una mujer de sobrevivir de la edad cero hasta la edad de reproducción 
+
+```
+Edad<-c("15-19","20-24","25-29","30-34","35-39","40-44")
+Nacimientos_mex<-c(461124,744810,621335,416575,204285,49032) 
+PoblacionFemenina_mex<-c(5505991,5079067,4582202,4444767,4328249,3658904)
+tef_mex<-c(Nacimientos_mex/PoblacionFemenina_mex*1000)
+Nacimientos_jap<-c(14687,116809,307767,389795,209707,31270)
+PoblacionFemenina_jap<-c(2974000,3404000,3688000,4286000,4776000,4243000)
+tef_jap<-c(Nacimientos_jap/PoblacionFemenina_jap*1000)
+
+Edad<-c("15-19","20-24","25-29","30-34","35-39","40-44","15-19","20-24","25-29","30-34","35-39","40-44")
+Nacimientos<-c(461124,744810,621335,416575,204285,49032,14687,116809,307767,389795,209707,31270) 
+PoblacionFemenina<-c(5505991,5079067,4582202,4444767,4328249,3658904,2974000,3404000,3688000,4286000,4776000,4243000)
+tef<-c(Nacimientos/PoblacionFemenina*1000)
+Pais<-c("México","México","México","México","México","México","Japón","Japón","Japón","Japón","Japón","Japón")
+TEF<-data.frame(Edad,Nacimientos,PoblacionFemenina,tef,Pais)
+```
+
+```install.packages("ggplot2")```
+```require(ggplot2)```
+
+ggplot(TEF, aes (x=Edad, y=tef,colour=Pais),GeomLine)+
+       geom_point(size =2)+
+       geom_line()+
+       theme(axis.title.x=element_text(face="bold",vjust=-0.5,        colour="darkslategray4",size=rel(1)))+
+       theme(axis.title.y=element_text(face="bold",vjust=-0.5,        colour="darkslategray3",size=rel(1)))+
+       ggtitle("Gráfica de Tasa Específica de Fecundidad")+
+       theme(plot.title=element_text(family="Comic Sans               MS",size=rel(1.5),vjust=2,face="bold",color="khaki4",lineheight=2))
+
+## Elogio de la pereza
+En mi opinión, cuando no hacemos nada analizamos situaciones vividas desde una vertiente más crítica, pero eso no es lo importante, lo que rescatemos para
+futuras acciones es lo que realmente vale la pena. Estas refelxiones incorporan todos los ámbitos, desde lo académico hasta lo más personal. 
+Creo importante resaltar que debemos diferenciar la pereza; de pasar mucho tiempo en el celular, computadora o videjuegos a realmente aprovechar esos ratos de 
+ocio para generar ideas de valor y pensamiento de rflexión. Aunque no pienso que lo primero sea malo del todo, solo recomiendo ser mesurables en ese sentido.
+
+
+## Ecuaciones de Fecundidad 
+
+TGrF=suma (nacimientos_i/pobfem_i)
+TGF=Suma(tef_i)
+TBR=suma(tef_i*S)
+Donde S=100/(100+propsex)
+y propsexo=nachombres/nacmujeres 
+TNR= suma(tef_i*S*PS)
+
+
+Para edades agrupadas solo se multiplica por el tamaño de grupo de edad "n"
+
+Edad<-c("15-19","20-24","25-29","30-34","35-39","40-44")
+Nacimientos<-c(12130,42103,80933,93107,55985,11480) 
+PoblacionFemenina<-c(727168,782583,791698,751566,814971,7469345)
+NacimientosFemeninos<-c(5895,20461,39331,45247,27207,5579)
+NacimiemntosMasculinos<-Nacimientos-NacimientosFemeninos
+
+TGrF<-5*sum(Nacimientos/PoblacionFemenina)
+tef<-Nacimientos/PoblacionFemenina
+TGF<-sum(tef)*5
+PropSex<-sum(NacimiemntosMasculinos)/sum(NacimientosFemeninos)*100
+S<-100/(100+PropSex)
+TBR<-5*sum(tef)*S
+TNR<-5*sum(tef*S)
+
+
+
+
+Hacer un análisis comparativo de dos municipios elegidos, añadir un poco de contexto sobre las diferencias de los municipios  
+
+
+Edad<-c("15-19","20-24","25-29","30-34","35-39","40-44")
+Nacimientos_Toluca<-c(3404,6414,6453,4711,2170,612) 
+NacimientosFemeninos_Toluca<-c(1649,3130,3182,2249,1037,287)
+NacimientosMasculinos_Toluca<-Nacimientos_Toluca-NacimientosFemeninos_Toluca
+PoblacionFemenina_Toluca<-c(38852,38756,38477,37112,36014,34427)
+
+Nacimientos_VillaVictoria<-c(298,475,441,206,93,24) 
+NacimientosFemeninos_VillaVictoria<-c(139,232,218,103,34,10)
+NacimientosMasculinos_VillaVictoria<-Nacimientos_VillaVictoria-NacimientosFemeninos_VillaVictoria
+PoblacionFemenina_VillaVictoria<-c(5862,5072,4823,4003,3626,2955)
+
+tef_Toluca<-Nacimientos_Toluca/PoblacionFemenina_Toluca
+TGrF_Toluca<-5*sum(Nacimientos_Toluca)/sum(PoblacionFemenina_Toluca)
+TGF_Toluca<-5*sum(tef_Toluca)
+PropSex_Toluca<-sum(NacimientosMasculinos_Toluca)/sum(NacimientosFemeninos_Toluca)*100
+S_Toluca<-100/(100+PropSex_Toluca)
+TBR_Toluca<-5*sum(tef_Toluca)*S_Toluca
+
+tef_VillaVictoria<-Nacimientos_VillaVictoria/PoblacionFemenina_VillaVictoria
+TGrF_VillaVictoria<-5*sum(Nacimientos_VillaVictoria)/sum(PoblacionFemenina_VillaVictoria)
+TGF_VillaVictoria<-5*sum(tef_VillaVictoria)
+PropSex_VillaVictoria<-sum(NacimientosMasculinos_VillaVictoria)/sum(NacimientosFemeninos_VillaVictoria)*100
+S_VillaVictoria<-100/(100+PropSex_VillaVictoria)
+TBR_VillaVictoria<-5*sum(tef_Toluca)*S_VillaVictoria
+
+Tasas<-data.frame(Edad,Nacimientos_Toluca,NacimientosFemeninos_Toluca,NacimientosMasculinos_Toluca,PoblacionFemenina_Toluca,Nacimientos_VillaVictoria,
+NacimientosMasculinos_VillaVictoria,PoblacionFemenina_VillaVictoria,tef_Toluca,tef_VillaVictoria)
+
+El municipio de Toluca es conocido como un espacio urbano, mientras que el municipio de Villa Victoria pertenece más al segmento de áreas rurales. 
+Dada la descripción anterior, podemos encontrar la diferencia entre las tasas que describen la forma en la que la población crece. Primero, tenemos que 
+establecer que la población de Touca supera los 850000 habitantes y la de Villa Victoria se aproxima alos 95000, es decir, la población de Villa Victoria 
+es cerca del 11% de Toluca. 
+
+La TGF de Toluca nos dice que en promedio hay 3 nacimientos por cada mujer  en un rango de 15-44 años. La TGF de Villa Victoria nos dice que hay 16 nacimientos 
+por cada 10 mujeres mientras se encuentren en el mismo rango de edad que las mujeres de Toluca. 
+
+La TGrF de Toluca nos dice que nacen 53 recien nacidos por cada 100 mujeres. La TGrF de Villa Victoria nos dice que hay 29 recien nacidos por cada 100 mujeres. 
+
+La TBR de Toluca indica que en  promedio 10 mujeres tendran 15 hijas en su periodo de reproducción si se siguen las tasa de fecundidad. La TBR de Villa Victoria 
+indica que en  promedio 10 mujeres tendran 15 hijas en su periodo de reproducción si se siguen las tasa de fecundidad. Este hecho es curioso, ya que podríamos decir
+que nacen mas mujeres en Villa Victoria que en Toluca.  
+
+       
