@@ -89,4 +89,189 @@ $r: tasa  de  crecimiento  exponencial$
 
 $n: número  de  años$
 
+###########2020###########
+ent<-c("edomex","cdmx","chiap")
+nac<-c(184447,65703,98098)
+def<-c(131133,132751,38662)
+CN<-(nac-def)
+inmI<-c(62817,104629,60438)
+emiI<-c()
+inminternos<-c(5190562,1679063,174961)
+eminternos<-c(1344291,4955432,678362)
+CSi<-inminternos-eminternos
+
+
+## Interpolación y extrapolación 
+
+Despues de calcular la tasa de crecimiento exponencial, es decir, de r, con esta información se podría calcular la cantidad de población en un país, región dentro del periodo estimado de la tasa calculada. 
+
+Por ejemplo, si estimamos una tasa de crecimiento exponencial de la población en el peridod 2004 a 2011, nosotros podriamos calcular la cantidad de población dentro de ese periodo en cualquier tiempo a través del método de interpolación, si nosotros quisieramos calcular la población fuera de ese periodo, el método para ese claculo se llama extrapolación y se plantea de la siguiente manera: 
+
+Interpolación 
+
+$Población inicial_{30/06/2005}=1101318000$
+
+$Poblacion calculada_{31/12/2008}=1101318000*e^{0.01399829*3.5}=1156619654$
+
+$Población final_{30/06/2011}=1197813000$
+
+$r=0.01399829$
+
+$n=3.5$
+
+
+Extrapolación 
+
+$Población inicial_{30/06/2005}=1101318000$
+
+$Poblacion calculada_{01/04/2000}=1101318000*e^{0.01399829*-5.2439}=1023293575$
+
+$Población final_{30/06/2011}=1197813000$
+
+$r=0.01399829$
+
+$n=-5.2493$
+
+
+##Tiempo de duplicidad de una población 
+
+Lo que se intenta conocer es el tiempo que le tomara a una población inicial duplicarse, basados en la tasa de crecimiento exponencial: 
+
+$TCE -> P_{t+n}=P_t*e^{r*n}$
+
+$P_t: población inicial$
+
+$r: tasa  de  crecimiento  exponencial$
+
+$n: tiempo$
+
+Por lo que de la ecuación anterieror despejamos a n:
+
+$2P_t=P_t*e^{r*n}$
+$n = \frac{ln{2}}{r}$
+
+Si 
+$r=0.01399$
+$n=0.6931/0.01399829$
+$n=49.51$
+
+Si en 1970 la tasa de crecimiento era de 3.1% con una población de 50.6 millones personas. ¿En cuánto tiempo México tendríamos 100 millones de personas?
+$100=50.6*e^{0.031*n}$
+$n=21.9747$
+Si en 2000 la tasa de crecimiento era de 1.4% con una población de 99 millones personas. ¿En cuánto tiempo México tendríamos 198 millones de personas?
+$198=99*e^{0.014*n}$
+$n=49.5105129$
+
+
+##Dinámica demográfica 
+
+En la dinámica demogfráfica se relacionan el tamaño, la composición, las perdidas y las ganancias de la población. 
+el tamaño se refiere a la cantidad de personas que existen en algun terriorio en un tiempo determinado. 
+La composición de una población se refiere al sexo, grupo de edad y las caracteríticas de una población. 
+Las perdidas  y ganacias se vinculan con la mortalidad, fecundidad y migración
+
+Tasas Brutas en la población 
+
+Una tasa bruta, como su nombre lo indica no considera la composición de la población (sexo, edad, nupcialidad) y la definimos de la siguiente manrea:
+TB= evento/población media 
+La población media se define como el promedio de población durante un periodo de tiempo 
+La población a mitad de año se relaciona, normalmente, con los datos del censo y se asocia a conocer la población de mitad de año el 30 de junio. 
+
+Ejemplo: tenemos la poblaión del año 2004 293657000 y la población de 2005 es 296410000. Entonces la población media de 2004-2005 es (293657000+296410000)/2=295033500
+
+Calcular las tasas brutas de los siguientes eventos: 
+Tasa brutas 2004-2005 USA 
+evento: nacimientos= 4129000, muertes= 2425000, inmigración=1122000 y emigración=73000
+
+TBN=0.01399502 Por cada 1000 personas en USA de 2004-2005 hay 14 nacimientos 
+TBM=0.008219406 Por cada 1000 personas en USA de 2004-2005 hay 8 muertes
+TBI=0.003802958 Por cada 1000 personas en USA de 2004-2005 hay 3 inmigrantes  
+TBE=0.0002474295 Por cada 100000 personas en USA de 2004-2005 hay 24 emigrantes 
+
+
+Tasas específicas en la población 
+Estas tasas si tienen relación con las características de la población (sexo, grupos de edad). 
+El planteamiento de las tasas específicas es el siguiente
+
+Te^i= evento^i/poblacion^i
+^i:= característica i
+
+
+Proporción de sexo 
+Este es otro indicador demográfico que permite conocer la cantidad de hombres y mujeres que existen con relación a las mujeres. La proporción de sexos es un indicador que muestra el balance entre el número de hombres y mujeres, en particular, por ejemplo se puede calcular la proporción masculina y se calcula dividiendo el numero de hombres entre el numero de mujeres. Se define d ela siguiente manera: 
+
+PS^i= hombres^i / mujeres^i 
+
+Brasil 
+Hombres (0-4) en 2008=8226630
+Mujeres (0-4) en 2008=7976611
+
+PS=8226630/7976611=1.031344
+En Brasil en el grupo de edad de 0-4 años hay 103 años por cada 100 mujeres
+
+
+Italia
+Hombres (0-4) en 2008=1453690
+Mujeres (0-4) en 2008=1373687
+
+PS=1453690/1373687=1.05824
+En Italia en el grupo de edad de 0-4 años hay 105 años por cada 100 mujeres
+
+## Cálculo de tasas brutas 
+
+
+$Poblacion Media_{2020}=798447$
+$Nacimientos_{2020}=10081$
+$Muertes_{2020}=4867$
+$Inmigrantes_{2020}=313283$
+$Emigrantes-{2020}= 42130$
+
+
+$TBN_{2020}=10081/798447=0.01262576$
+Por cada 1000 habitantes de Baja California Sur hay 13 nacimientos 
+
+$TBM_{2020}=4867/798447=0.006095583$
+Por cada 1000 habitantes de Baja California Sur hay 6 muertes
+
+$TBI_{2020}=313283/798447= 0.3923654$
+Por cada 100 habitantes de Baja California Sur hay 39 inmigrantes 
+
+$TBE_{2020}=42130/798447=0.05276493$
+Por cada 100 habitantes de Baja California Sur hay 5 emigrantes 
+
+```Entidades<-c("AGS","MEX", "CHIAP" )
+TBN<-c(0.0142886,0.01080,0.03949243)
+TBM<-c(0.0069605,0.0089,0.02247131)
+TBI<-c(0.1939034,0.03054,0.04490611)
+TBE<-c(0.101438,0.079,0.1270692)```
+
+```Base<-data.frame (Entidades, TBN, TBM, TBI, TBE)
+Base1<-data.frame(Base$Entidades,Base[,2:5]*100)```
+
+
+## Proporción de sexos al nacimeinto 
+
+La proporción de sexos al nacimiento se define de la siguiente manera: 
+
+$PSN=Nacimientos de hombres/Nacimientos de mujeres$
+$PSN_{BCS}=5099/4982=1.023485$
+
+Nacen 102 hombres por cada 100 mujeres que nacen en el estado de Baja California Sur en el año 2022  
+ 
+
+## Proporción de niños por mujer 
+La proporción de niños por mujer se define de la siguiente manera: 
+
+$PNM=Poblacion de personas menores de 5 años/Población femenina$
+$PNM_{<5 años/15-44}=2827377/23855033=.1185233$
+
+Por cada 100 mujeres que se encuentran en un rango de edad 15-44 hay 11 niños menores a 5 años 
+
+##Tasa de dependencia 
+
+Se encuentra relacionada con las personas que tienen más posibilidades de ser dependientes 
+
+$TD=Pob_{0-14 + 65-100} / Pob_{15-64}$
+
+
 
