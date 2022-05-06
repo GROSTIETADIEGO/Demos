@@ -1,44 +1,62 @@
-###########2020###########
-ent<-c("edomex","cdmx","chiap")
-nac<-c(184447,65703,98098)
-def<-c(131133,132751,38662)
-CN<-(nac-def)
-inmI<-c(62817,104629,60438)
-emiI<-c()
-inminternos<-c(5190562,1679063,174961)
-eminternos<-c(1344291,4955432,678362)
-CSi<-inminternos-eminternos
+## Pirámide Poblacional 
+
+```install.packages("pyramid")
+require (pyramid)```
+
+```hombres<-c(60,50,40,30,25,20,15,10) #Población de hombres```
+```names(hombres)<-c('0-9','10-19','20-29','30-39','40-49','50-59','60-69','70y+') #Grupos de edad```
+```mujeres<-c(80,70,50,30,28,23,18,15)```
+
+```pyramids(Left=hombres, Llab="Hombres",Right=mujeres,Rlab="Mujeres",Clab="Grupo de edad",Lcol="Blue", Rcol="Magenta",Laxis=c(0,25,50,75,100), Csize=0.75, main="Gráfica 1. Demografía")```
+
+
+```install.packages("ggplot2")
+require(ggplot2)```
+
+```install.packages("dplyr")
+require(dplyr)```
+
+```ags<-read.csv("Personas01.CSV")
+
+agsMUJ<-ags %>%
+as_tibble() %>%
+mutate(gpoeda=case_when(EDAD>=0 & EDAD<= 4~1,
+EDAD>=5 & EDAD<=9~2,
+EDAD>=10 & EDAD<=14~3,
+EDAD>=15 & EDAD<=19~4,
+EDAD>=20 & EDAD<=24~5,
+EDAD>=25 & EDAD<=29~6,
+EDAD>=30 & EDAD<=34~7,
+EDAD>=35 & EDAD<=39~8,
+EDAD>=40 & EDAD<=44~9,
+EDAD>=45 & EDAD<=49~10,
+EDAD>=50 & EDAD<=54~11,
+EDAD>=55 & EDAD<=59~12,
+EDAD>=60 & EDAD<=64~13,
+EDAD>=65 & EDAD<=130~14,
+EDAD==999~15),conyu=case_when(SITUA_CONYUGAL==1 | (SITUA_CONYUGAL>=5 & SITUA_CONYUGAL<=7)~1,SITUA_CONYUGAL==2 & SITUA_CONYUGAL==4~2,SITUA_CONYUGAL==8~3,SITUA_CONYUGAL==9~4))%>%
+filter (SEXO==3 & (EDAD>=50))%>%
+select(SEXO, MUN, INGTRMEN, EDAD, SITUA_CONYUGAL, conyu,gpoeda)
+
+agsMUJ%>%
+group_by(MUN)%>%
+summarise(mediana=median(INGTRMEN, na.rm=T))```
+table(agsMUJ$SEXO)
+table(agsMUJ$EDAD)
+```table(ags$gpoeda)```
+
+```install.packages("questionr")
+require(questionr)```
+
+```wtd.table(ags$SEXO,weights=ags$FACTOR)```
+```wtd.table(ags$gpoeda,weights=ags$FACTOR)```
+
+```table(ags$gpoeda)```
+
+base2<-ags%>%
+as_tibble()%>%
+filter(MUN==1 | MUN==2)
 
 
 
 
-## Interpolación y extrapolación 
-
-Despues de calcular la tasa de crecimiento exponencial, es decir, de r, con esta información se podría calcular la cantidad de población en un país, región dentro del periodo estimado de la tasa calculada. 
-
-Por ejemplo, si estimamos una tasa de crecimiento exponencial de la población en el peridod 2004 a 2011, nosotros podriamos calcular la cantidad de población dentro de ese periodo en cualquier tiempo a través del método de interpolación, si nosotros quisieramos calcular la población fuera de ese periodo, el método para ese claculo se llama extrapolación y se plantea de la siguiente manera: 
-
-Interpolación 
-
-$Población inicial_{30/06/2005}=1101318000$
-
-$Poblacion calculada_{31/12/2008}=1101318000*e^{0.01399829*3.5}=1156619654$
-
-$Población final_{30/06/2011}=1197813000$
-
-$r=0.01399829$
-
-$n=3.5$
-
-
-Extrapolación 
-
-$Población inicial_{30/06/2005}=1101318000$
-
-$Poblacion calculada_{01/04/2000}=1101318000*e^{0.01399829*-5.2439}=1023293575$
-
-$Población final_{30/06/2011}=1197813000$
-
-$r=0.01399829$
-
-$n=-5.2493$
