@@ -25,3 +25,38 @@ install.packages("questionr")
 require(questionr)
 wtd.table(base1$SEXO, weights = base1$FACTOR)
 wtd.table(base$SEXO, weights = base$FACTOR)
+
+
+install.packages("dplyr")
+require(dplyr)
+
+base_bcs<-read.csv("Personas03.CSV")
+
+base_bcs1<- base_bcs %>%
+  as_tibble()%>%
+  mutate(GPOEDAD=case_when(EDAD>=0 & EDAD<=14 ~ 1,
+                           EDAD>=15 & EDAD<=19 ~ 2,
+                           EDAD>=20 & EDAD<=24 ~ 3,
+                           EDAD>=25 & EDAD<=29 ~ 4,
+                           EDAD>=30 & EDAD<=34 ~ 5,
+                           EDAD>=35 & EDAD<=39 ~ 6,
+                           EDAD>=40 & EDAD<=44 ~ 7,
+                           EDAD>=45 & EDAD<=130 ~ 8,
+                           EDAD==999 ~ 0), 
+         CONYU=case_when(SITUA_CONYUGAL==1 | (SITUA_CONYUGAL>=5 & SITUA_CONYUGAL<=7)~1,
+                         SITUA_CONYUGAL>=2 & SITUA_CONYUGAL<=4 ~ 2,
+                         SITUA_CONYUGAL==8 ~ 3,
+                         SITUA_CONYUGAL==9 ~ 0))%>%
+  filter(MUN>=1 & MUN<=3)%>%
+  select(MUN,EDAD,SEXO,SITUA_CONYUGAL,GPOEDAD,CONYU,FACTOR)
+         
+table(base_bcs1$EDAD,base_bcs1$GPOEDAD)
+table(base_bcs1$SITUA_CONYUGAL,base_bcs1$CONYU)
+table(base_bcs1$MUN)
+table(base_bcs1$SEXO)
+
+install.packages("questionr")
+require(questionr)
+
+wtd.table(base_bcs1$SEXO, weights = base_bcs1$FACTOR)
+wtd.table(base_bcs$SEXO, weights = base_bcs$FACTOR)
