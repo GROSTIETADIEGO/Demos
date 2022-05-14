@@ -1,0 +1,179 @@
+##PERSONAS
+
+install.packages("dplyr")
+require(dplyr)
+
+install.packages("questionr")
+require(questionr)  
+
+baseP_coah<-read.csv("Personas05.CSV")
+baseP_sina<-read.csv("Personas25.CSV")
+
+baseP_coah1<-baseP_coah %>% 
+  as_tibble() %>%
+  mutate(GPOEDAD_COA=case_when(EDAD>=0 & EDAD<=9 ~ 1,
+                           EDAD>=10 & EDAD<=19 ~ 2,
+                           EDAD>=20 & EDAD<=29 ~ 3,
+                           EDAD>=30 & EDAD<=39 ~ 5,
+                           EDAD>=40 & EDAD<=49 ~ 6,
+                           EDAD>=50 & EDAD<=59 ~ 7,
+                           EDAD>=60 & EDAD<=69 ~ 8,
+                           EDAD>=70 & EDAD<=74 ~ 9,
+                           EDAD>=75 & EDAD<=130 ~ 10,
+                           EDAD==999 ~ 0),
+         NIVEL_ESCOLAR_COA=case_when(NIVACAD>=00 & NIVACAD<=3 ~ 1,
+                                 NIVACAD>=4 & NIVACAD<=8 ~ 2,
+                                 NIVACAD>=9 & NIVACAD<=14 ~ 3, 
+                                 NIVACAD==99 ~ 0),
+         ESTADO_CIVIL_COA=case_when(SITUA_CONYUGAL==1 ~ 1,
+                                SITUA_CONYUGAL>=5 & SITUA_CONYUGAL<=7 ~ 2,
+                                SITUA_CONYUGAL==8 ~ 3,
+                                SITUA_CONYUGAL==9 ~ 0),
+         SEXO_COA=SEXO)%>%
+  select(SEXO_COA,GPOEDAD_COA,NIVEL_ESCOLAR_COA,ESTADO_CIVIL_COA,FACTOR)
+
+baseP_sina1<-baseP_sina %>% 
+  as_tibble() %>%
+  mutate(GPOEDAD_SIN=case_when(EDAD>=0 & EDAD<=9 ~ 1,
+                               EDAD>=10 & EDAD<=19 ~ 2,
+                               EDAD>=20 & EDAD<=29 ~ 3,
+                               EDAD>=30 & EDAD<=39 ~ 5,
+                               EDAD>=40 & EDAD<=49 ~ 6,
+                               EDAD>=50 & EDAD<=59 ~ 7,
+                               EDAD>=60 & EDAD<=69 ~ 8,
+                               EDAD>=70 & EDAD<=74 ~ 9,
+                               EDAD>=75 & EDAD<=130 ~ 10,
+                               EDAD==999 ~ 0),
+         NIVEL_ESCOLAR_SIN=case_when(NIVACAD>=0 & NIVACAD<=3 ~ 1,
+                                     NIVACAD>=4 & NIVACAD<=8 ~ 2,
+                                     NIVACAD>=9 & NIVACAD<=14 ~ 3, 
+                                     NIVACAD==99 ~ 0),
+         ESTADO_CIVIL_SIN=case_when(SITUA_CONYUGAL==1 ~ 1,
+                                    SITUA_CONYUGAL>=5 & SITUA_CONYUGAL<=7 ~ 2,
+                                    SITUA_CONYUGAL==8 ~ 3,
+                                    SITUA_CONYUGAL==9 ~ 0),
+         SEXO_SIN=SEXO)%>%
+  select(SEXO_SIN,GPOEDAD_SIN,NIVEL_ESCOLAR_SIN,ESTADO_CIVIL_SIN,FACTOR)
+
+
+table(baseP_coah$EDAD,baseP_coah1$GPOEDAD_COA)
+table(baseP_sina$EDAD,baseP_sina1$GPOEDAD_SIN)
+table(baseP_coah$SEXO,baseP_coah1$SEXO_COA)
+table(baseP_sina$SEXO,baseP_sina1$SEXO_SIN)
+
+table(baseP_coah$NIVACAD,baseP_coah1$NIVEL_ESCOLAR_COA)
+table(baseP_sina$NIVACAD,baseP_sina1$NIVEL_ESCOLAR_SIN)
+table(baseP_coah$SITUA_CONYUGAL,baseP_coah1$ESTADO_CIVIL_COA)
+table(baseP_sina$SITUA_CONYUGAL,baseP_sina1$ESTADO_CIVIL_SIN)
+wtd.table(baseP_coah1$SEXO_COA, weights = baseP_coah1$FACTOR)
+wtd.table(baseP_sina1$SEXO_SIN, weights = baseP_sina1$FACTOR)
+
+table(baseP_coah1$SEXO_COA)
+wtd.table(baseP_coah1$SEXO_COA, weights = baseP_coah1$FACTOR)
+table(baseP_coah1$GPOEDAD_COA)
+wtd.table(baseP_coah1$GPOEDAD_COA, weights = baseP_coah1$FACTOR)
+table(baseP_coah1$NIVEL_ESCOLAR_COA)
+wtd.table(baseP_coah1$NIVEL_ESCOLAR_COA, weights = baseP_coah1$FACTOR)
+table(baseP_coah1$NIVEL_ESCOLAR_COA)
+wtd.table(baseP_coah1$NIVEL_ESCOLAR_COA, weights = baseP_coah1$FACTOR)
+table(baseP_coah1$ESTADO_CIVIL_COA)
+wtd.table(baseP_coah1$ESTADO_CIVIL_COA, weights = baseP_coah1$FACTOR)
+
+table(baseP_sina1$SEXO_SIN)
+wtd.table(baseP_sina1$SEXO_SIN, weights = baseP_sina1$FACTOR)
+table(baseP_sina1$GPOEDAD_SIN)
+wtd.table(baseP_sina1$GPOEDAD_SIN, weights = baseP_sina1$FACTOR)
+table(baseP_sina1$NIVEL_ESCOLAR_SIN)
+wtd.table(baseP_sina1$NIVEL_ESCOLAR_SIN, weights = baseP_sina1$FACTOR)
+table(baseP_sina1$NIVEL_ESCOLAR_SIN)
+wtd.table(baseP_sina1$NIVEL_ESCOLAR_SIN, weights = baseP_sina1$FACTOR)
+table(baseP_sina1$ESTADO_CIVIL_SIN)
+wtd.table(baseP_sina1$ESTADO_CIVIL_SIN, weights = baseP_sina1$FACTOR)
+
+
+##VIVIENDAS
+install.packages("dplyr")
+require(dplyr)
+
+install.packages("questionr")
+require(questionr) 
+
+baseV_coah<-read.csv("Viviendas05.CSV")
+baseV_sina<-read.csv("Viviendas25.CSV")
+
+base_Vcoah1<-baseV_coah %>% 
+  as_tibble() %>%
+  mutate(CLASE_VIVIENDA_COA=case_when(CLAVIVP>=1 & CLAVIVP<=3 ~ 1,
+                                  CLAVIVP==4 ~ 2,
+                                  CLAVIVP>=5 & CLAVIVP<=9 ~ 3,
+                                  CLAVIVP==99 ~ 0),
+         TECHO_COA=case_when(TECHOS==1 ~ 1,
+                             TECHOS>=2 & TECHOS<=5 ~ 2,
+                             TECHOS==6 ~ 3,
+                             TECHOS==7 ~ 4,
+                             TECHOS==10 ~ 5,
+                             TECHOS==8 | TECHOS==9 ~ 6,
+                             TECHOS==99 ~ 0),
+         EQUIPAMIENTO_COA=case_when(REFRIGERADOR==1 & LAVADORA==3 & AUTOPROP==7 & INTERNET==7 ~ 1,
+                                    REFRIGERADOR==2 & LAVADORA==4 & AUTOPROP==8 & INTERNET==8 ~ 2),
+         COMER_COA=case_when(ALIMENTACION==1 ~ 1,
+                             ALIMENTACION==3 ~ 2,
+                             ALIMENTACION==9 ~ 0),
+         TENENCIA_VIVIENDA_COA=case_when(TENENCIA==1 ~ 1,
+                                         TENENCIA==2 ~ 2, 
+                                         TENENCIA==3 ~ 3,
+                                         TENENCIA==4 ~ 4,
+                                         TENENCIA==9 ~ 0))%>%
+select(CLASE_VIVIENDA_COA, TECHO_COA, EQUIPAMIENTO_COA,COMER_COA,TENENCIA_VIVIENDA_COA,FACTOR)
+
+base_Vsina1<-baseV_sina %>% 
+  as_tibble() %>%
+  mutate(CLASE_VIVIENDA_SIN=case_when(CLAVIVP>=1 & CLAVIVP<=3 ~ 1,
+                                      CLAVIVP==4 ~ 2,
+                                      CLAVIVP>=5 & CLAVIVP<=9 ~ 3,
+                                      CLAVIVP==99 ~ 0),
+         TECHO_SIN=case_when(TECHOS==1 ~ 1,
+                             TECHOS>=2 & TECHOS<=5 ~ 2,
+                             TECHOS==6 ~ 3,
+                             TECHOS==7 ~ 4,
+                             TECHOS==10 ~ 5,
+                             TECHOS==8 | TECHOS==9 ~ 6,
+                             TECHOS==99 ~ 0),
+         EQUIPAMIENTO_SIN=case_when(REFRIGERADOR==1 & LAVADORA==3 & AUTOPROP==7 & INTERNET==7 ~ 1,
+                                    REFRIGERADOR==2 & LAVADORA==4 & AUTOPROP==8 & INTERNET==8 ~ 2),
+         COMER_SIN=case_when(ALIMENTACION==1 ~ 1,
+                             ALIMENTACION==3 ~ 2,
+                             ALIMENTACION==9 ~ 0),
+         TENENCIA_VIVIENDA_SIN=case_when(TENENCIA==1 ~ 1,
+                                         TENENCIA==2 ~ 2, 
+                                         TENENCIA==3 ~ 3,
+                                         TENENCIA==4 ~ 4,
+                                         TENENCIA==9 ~ 0))%>%
+select(CLASE_VIVIENDA_SIN, TECHO_SIN, EQUIPAMIENTO_SIN,COMER_SIN,TENENCIA_VIVIENDA_SIN,FACTOR)
+
+
+
+table(base_Vcoah1$CLASE_VIVIENDA_COA)
+wtd.table(base_Vcoah1$CLASE_VIVIENDA_COA, weights = base_Vcoah1$FACTOR)
+table(base_Vsina1$CLASE_VIVIENDA_SIN)
+wtd.table(base_Vsina1$CLASE_VIVIENDA_SIN, weights = base_Vsina1$FACTOR)
+
+table(base_Vcoah1$TECHO_COA)
+wtd.table(base_Vcoah1$TECHO_COA, weights = base_Vcoah1$FACTOR)
+table(base_Vsina1$TECHO_SIN)
+wtd.table(base_Vsina1$TECHO_SIN, weights = base_Vsina1$FACTOR)
+
+table(base_Vcoah1$EQUIPAMIENTO_COA)
+wtd.table(base_Vcoah1$EQUIPAMIENTO_COA, weights = base_Vcoah1$FACTOR)
+table(base_Vsina1$EQUIPAMIENTO_SIN)
+wtd.table(base_Vsina1$EQUIPAMIENTO_SIN, weights = base_Vsina1$FACTOR)
+
+table(base_Vcoah1$COMER_COA)
+wtd.table(base_Vcoah1$COMER_COA, weights = base_Vcoah1$FACTOR)
+table(base_Vsina1$COMER_SIN)
+wtd.table(base_Vsina1$COMER_SIN, weights = base_Vsina1$FACTOR)
+
+table(base_Vcoah1$TENENCIA_VIVIENDA_COA)
+wtd.table(base_Vcoah1$TENENCIA_VIVIENDA_COA, weights = base_Vcoah1$FACTOR)
+table(base_Vsina1$TENENCIA_VIVIENDA_SIN)
+wtd.table(base_Vsina1$TENENCIA_VIVIENDA_SIN, weights = base_Vsina1$FACTOR)
