@@ -177,3 +177,41 @@ table(base_Vcoah1$TENENCIA_VIVIENDA_COA)
 wtd.table(base_Vcoah1$TENENCIA_VIVIENDA_COA, weights = base_Vcoah1$FACTOR)
 table(base_Vsina1$TENENCIA_VIVIENDA_SIN)
 wtd.table(base_Vsina1$TENENCIA_VIVIENDA_SIN, weights = base_Vsina1$FACTOR)
+
+
+##Medidas de fecundidad 
+Edad<-c("15-19","20-24","25-29","30-34","35-39","40-44")
+PS<-c(0.997551401, 0.997297924,0.996916808,0.996350336,0.995513067,0.994262196)
+Nacimientos_coa<-c(7698,13487,12420,7972,3506,795) 
+PoblacionFemenina_coa<-c(132434,130654,123347,113447,110263,111696)
+NacimientosFemeninos_coa<-c(3789,6635,6082,4013,1739,402)
+NacimiemntosMasculinos_coa<-Nacimientos_coa-NacimientosFemeninos_coa
+Nacimientos_sin<-c(5377,10136,10837,7756,3541,814) 
+PoblacionFemenina_sin<-c(129030,129014,118849,110211,104776,104332)
+NacimientosFemeninos_sin<-c(2651,4927,5305,3774,1745,404)
+NacimiemntosMasculinos_sin<-Nacimientos_sin-NacimientosFemeninos_sin
+
+
+tef_coa<-Nacimientos_coa/PoblacionFemenina_coa
+TGF_coa<-sum(tef_coa)*5
+PropSex_coa<-sum(NacimiemntosMasculinos_coa)/sum(NacimientosFemeninos_coa)*100
+S_coa<-100/(100+PropSex_coa)
+TBR_coa<-5*sum(tef_coa*S_coa)
+TNR_coa<-5*sum(tef_coa*S_coa*PS)
+
+tef_sin<-Nacimientos_sin/PoblacionFemenina_sin
+TGF_sin<-sum(tef_sin)*5
+PropSex_sin<-sum(NacimiemntosMasculinos_sin)/sum(NacimientosFemeninos_sin)*100
+S_sin<-100/(100+PropSex_sin)
+TBR_sin<-5*sum(tef_sin*S_sin)
+TNR_sin<-5*sum(tef_sin*S_sin*PS)
+
+tef_coa
+tef_sin
+
+TGF_coa
+TBR_coa
+TNR_coa
+TGF_sin
+TBR_sin
+TNR_sin
