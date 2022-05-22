@@ -1,0 +1,35 @@
+install.packages("dplyr")
+require (dplyr)
+bcs <- read.csv (file.choose())
+bcs1 <- bcs %>%
+  as_tibble() %>%
+  mutate (gpoed = case_when(EDAD == 0 ~ 0,
+                            EDAD >= 1 &  EDAD <=4~ 1,
+                            EDAD >= 5 &  EDAD <=9~ 2,
+                            EDAD >= 10 &  EDAD <=14~ 3,
+                            EDAD >= 15 &  EDAD <=19~ 4,
+                            EDAD >= 20 &  EDAD <=24~ 5,
+                            EDAD >= 25 &  EDAD <=29~ 6,
+                            EDAD >= 30 &  EDAD <=34~ 7,
+                            EDAD >= 35 &  EDAD <=39~ 8,
+                            EDAD >= 40 &  EDAD <=44~ 9,
+                            EDAD >= 45 &  EDAD <=49~ 10,
+                            EDAD >= 50 &  EDAD <=54~ 11,
+                            EDAD >= 55 &  EDAD <=59~ 12,
+                            EDAD >=60 &  EDAD <=64~ 13,
+                            EDAD >= 65 &  EDAD <=69~ 14,
+                            EDAD >= 70 &  EDAD <=74~ 15,
+                            EDAD >= 75 &  EDAD <=79~ 16,
+                            EDAD >= 80 &  EDAD <=84~ 17,
+                            EDAD >= 85 &  EDAD <=109~ 18,
+                            EDAD == 999 ~ 19)) %>%
+  select (gpoed, ENT, EDAD, FACTOR)
+
+install.packages("questionr")
+require (questionr)
+t1 <- data.frame( wtd.table (bcs1$gpoed, weights = bcs1$FACTOR))
+t1
+defbcs <- read.csv((file.choose()))
+def1 <- data.frame(defbcs, t1)
+tem <- def1$Muertos/def1$Freq
+tem
