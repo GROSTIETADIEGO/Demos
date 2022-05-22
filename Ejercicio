@@ -1,0 +1,23 @@
+causa_muerte<-c("(C00-D48)","(E00-E90)","(I00-I99)","(J00-J99)"," (U00-U49)")
+
+poblacion_coa<-3146771	
+totalidad_muertes_coa<-28290
+muertes_total_coa<-c(2525,4397,6693,2406,6377)
+muertes_hombres_coa<-c(1272,2230,3753,1440,3816)
+muertes_mujeres_coa<-muertes_total_coa-muertes_hombres_coa
+Porcentaje_de_muertes_masculinas_por_enfermedad_coa<-muertes_hombres_coa/muertes_total_coa
+Porcentaje_de_muertes_femeninas_por_enfermedad_coa<-muertes_mujeres_coa/muertes_total_coa
+Distribucion_de_muertes_por_causa_coa<-muertes_total_coa/totalidad_muertes_coa
+Tasa_de_mortalidad_por_causas_coa<-muertes_total_coa/poblacion_coa*100000
+
+poblacion_sin<-3026943		
+totalidad_muertes_sin<-24277
+muertes_total_sin<-c(2436,2394,6092,2533,5491)
+muertes_hombres_sin<-c(1329,1242,3563,1540,3274)
+muertes_mujeres_sin<-muertes_total_sin-muertes_hombres_sin
+Porcentaje_de_muertes_masculinas_por_enfermedad_sin<-muertes_hombres_sin/muertes_total_sin
+Porcentaje_de_muertes_femeninas_por_enfermedad_sin<-muertes_mujeres_sin/muertes_total_sin
+Distribucion_de_muertes_por_causa_sin<-muertes_total_sin/totalidad_muertes_sin
+Tasa_de_mortalidad_por_causas_sin<-muertes_total_sin/poblacion_sin*100000
+
+T<-data.frame(causa_muerte,Porcentaje_de_muertes_masculinas_por_enfermedad_coa,Porcentaje_de_muertes_femeninas_por_enfermedad_coa,Distribucion_de_muertes_por_causa_coa,Tasa_de_mortalidad_por_causas_coa,Porcentaje_de_muertes_masculinas_por_enfermedad_sin,Porcentaje_de_muertes_femeninas_por_enfermedad_sin,Distribucion_de_muertes_por_causa_sin,Tasa_de_mortalidad_por_causas_sin)
