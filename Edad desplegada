@@ -1,0 +1,187 @@
+T_mex<-data.frame(read.csv(file.choose()))
+T_coa<-data.frame(read.csv(file.choose()))
+T_sina<-data.frame(read.csv(file.choose()))
+Mt_mex<-T_mex$Total_D/T_mex$Total_P
+Mh_mex<-T_mex$Hombre_D/T_mex$Hombre_P
+Mm_mex<-T_mex$Mujer_D/T_mex$Mujer_P
+Mt_coa<-T_coa$Total_D/T_coa$Total_P
+Mh_coa<-T_coa$Hombre_D/T_coa$Hombre_P
+Mm_coa<-T_coa$Mujer_D/T_coa$Mujer_P
+Mt_sina<-T_sina$Total_D/T_sina$Total_P
+Mh_sina<-T_sina$Hombre_D/T_sina$Hombre_P
+Mm_sina<-T_sina$Mujer_D/T_sina$Mujer_P
+
+#1629211	45815	38971	
+qt_mex<-numeric(101)
+qt_coa<-numeric(101)
+qt_sina<-numeric(101)
+qt_mex[1]<-T_mex$Total_D[1]/1629211
+qt_coa[1]<-T_coa$Total_D[1]/45815
+qt_sina[1]<-T_sina$Total_D[1]/38971
+for(i in 2:101){
+  qt_mex[i]<-2*Mt_mex[i]/(2+Mt_mex[i])
+  qt_coa[i]<-2*Mt_coa[i]/(2+Mt_coa[i])
+  qt_sina[i]<-2*Mt_sina[i]/(2+Mt_sina[i])}
+qt_mex[101]<-1
+qt_coa[101]<-1
+qt_sina[101]<-1
+
+lxt_mex<-numeric(101)
+lxt_mex[1]<-100000
+lxt_coa<-numeric(101)
+lxt_coa[1]<-100000
+lxt_sina<-numeric(101)
+lxt_sina[1]<-100000
+for(i in 2:101){
+  lxt_mex[i]<-lxt_mex[i-1]*(1-qt_mex[i-1])
+  lxt_coa[i]<-lxt_coa[i-1]*(1-qt_coa[i-1])
+  lxt_sina[i]<-lxt_sina[i-1]*(1-qt_sina[i-1])}
+
+Lxt_mex<-numeric(101)
+Lxt_coa<-numeric(101)
+Lxt_sina<-numeric(101)
+Lxt_mex[1]<-0.3*lxt_mex[1]+0.7*lxt_mex[2]
+Lxt_coa[1]<-0.3*lxt_coa[1]+0.7*lxt_coa[2]
+Lxt_sina[1]<-0.3*lxt_sina[1]+0.7*lxt_sina[2]
+for(i in 2:101){
+  Lxt_mex[i]<- lxt_mex[i+1]+1/2*(lxt_mex[i]-lxt_mex[i+1])
+  Lxt_coa[i]<- lxt_coa[i+1]+1/2*(lxt_coa[i]-lxt_coa[i+1])
+  Lxt_sina[i]<- lxt_sina[i+1]+1/2*(lxt_sina[i]-lxt_sina[i+1])}
+Lxt_mex[101]<-0
+Lxt_coa[101]<-0
+Lxt_sina[101]<-0
+
+Txt_mex<-numeric(101)
+Txt_coa<-numeric(101)
+Txt_sina<-numeric(101)
+for(i in 1:101){
+  Txt_mex[i]<- sum(Lxt_mex[i:101])
+  Txt_coa[i]<- sum(Lxt_coa[i:101])
+  Txt_sina[i]<- sum(Lxt_sina[i:101])}
+
+dxt_mex<-qt_mex*lxt_mex
+dxt_coa<-qt_coa*lxt_coa
+dxt_sina<-qt_sina*lxt_sina
+ext_mex <- Txt_mex/lxt_mex
+ext_coa <- Txt_coa/lxt_coa
+ext_sina <- Txt_sina/lxt_sina
+
+Vidatd<-data.frame(qt_mex,lxt_mex,Lxt_mex,Txt_mex,ext_mex,
+                  qt_coa,lxt_coa,Lxt_coa,Txt_coa,ext_coa,
+                  qt_sina,lxt_sina,Lxt_sina,Txt_sina,ext_sina)
+
+qh_mex<-numeric(101)
+qh_coa<-numeric(101)
+qh_sina<-numeric(101)
+qh_mex[1]<-T_mex$Hombre_D[1]/828944
+qh_coa[1]<-T_coa$Hombre_D[1]/23221
+qh_sina[1]<-T_sina$Hombre_D[1]/19891
+for(i in 2:101){
+  qh_mex[i]<-2*Mh_mex[i]/(2+Mh_mex[i])
+  qh_coa[i]<-2*Mh_coa[i]/(2+Mh_coa[i])
+  qh_sina[i]<-2*Mh_sina[i]/(2+Mh_sina[i])}
+qh_mex[101]<-1
+qh_coa[101]<-1
+qh_sina[101]<-1
+
+lxh_mex<-numeric(101)
+lxh_mex[1]<-100000
+lxh_coa<-numeric(101)
+lxh_coa[1]<-100000
+lxh_sina<-numeric(101)
+lxh_sina[1]<-100000
+for(i in 2:101){
+  lxh_mex[i]<-lxh_mex[i-1]*(1-qh_mex[i-1])
+  lxh_coa[i]<-lxh_coa[i-1]*(1-qh_coa[i-1])
+  lxh_sina[i]<-lxh_sina[i-1]*(1-qh_sina[i-1])}
+
+Lxh_mex<-numeric(101)
+Lxh_coa<-numeric(101)
+Lxh_sina<-numeric(101)
+Lxh_mex[1]<-0.3*lxh_mex[1]+0.7*lxh_mex[2]
+Lxh_coa[1]<-0.3*lxh_coa[1]+0.7*lxh_coa[2]
+Lxh_sina[1]<-0.3*lxh_sina[1]+0.7*lxh_sina[2]
+for(i in 2:101){
+  Lxh_mex[i]<- lxh_mex[i+1]+1/2*(lxh_mex[i]-lxh_mex[i+1])
+  Lxh_coa[i]<- lxh_coa[i+1]+1/2*(lxh_coa[i]-lxh_coa[i+1])
+  Lxh_sina[i]<- lxh_sina[i+1]+1/2*(lxh_sina[i]-lxh_sina[i+1])}
+Lxh_mex[101]<-0
+Lxh_coa[101]<-0
+Lxh_sina[101]<-0
+
+Txh_mex<-numeric(101)
+Txh_coa<-numeric(101)
+Txh_sina<-numeric(101)
+for(i in 1:101){
+  Txh_mex[i]<- sum(Lxh_mex[i:101])
+  Txh_coa[i]<- sum(Lxh_coa[i:101])
+  Txh_sina[i]<- sum(Lxh_sina[i:101])}
+
+dxh_mex<-qh_mex*lxh_mex
+dxh_coa<-qh_coa*lxh_coa
+dxh_sina<-qh_sina*lxh_sina
+exh_mex <- Txh_mex/lxh_mex
+exh_coa <- Txh_coa/lxh_coa
+exh_sina <- Txh_sina/lxh_sina
+
+Vidahd<-data.frame(qh_mex,lxh_mex,Lxh_mex,Txh_mex,exh_mex,
+                   qh_coa,lxh_coa,Lxh_coa,Txh_coa,exh_coa,
+                   qh_sina,lxh_sina,Lxh_sina,Txh_sina,exh_sina)
+
+qm_mex<-numeric(101)
+qm_coa<-numeric(101)
+qm_sina<-numeric(101)
+qm_mex[1]<-T_mex$Mujer_D[1]/800264
+qm_coa[1]<-T_coa$Mujer_D[1]/22594
+qm_sina[1]<-T_sina$Mujer_D[1]/19080
+for(i in 2:101){
+  qm_mex[i]<-2*Mm_mex[i]/(2+Mm_mex[i])
+  qm_coa[i]<-2*Mm_coa[i]/(2+Mm_coa[i])
+  qm_sina[i]<-2*Mm_sina[i]/(2+Mm_sina[i])}
+qm_mex[101]<-1
+qm_coa[101]<-1
+qm_sina[101]<-1
+
+lxm_mex<-numeric(101)
+lxm_mex[1]<-100000
+lxm_coa<-numeric(101)
+lxm_coa[1]<-100000
+lxm_sina<-numeric(101)
+lxm_sina[1]<-100000
+for(i in 2:101){
+  lxm_mex[i]<-lxm_mex[i-1]*(1-qm_mex[i-1])
+  lxm_coa[i]<-lxm_coa[i-1]*(1-qm_coa[i-1])
+  lxm_sina[i]<-lxm_sina[i-1]*(1-qm_sina[i-1])}
+
+Lxm_mex<-numeric(101)
+Lxm_coa<-numeric(101)
+Lxm_sina<-numeric(101)
+Lxm_mex[1]<-0.3*lxm_mex[1]+0.7*lxm_mex[2]
+Lxm_coa[1]<-0.3*lxm_coa[1]+0.7*lxm_coa[2]
+Lxm_sina[1]<-0.3*lxm_sina[1]+0.7*lxm_sina[2]
+for(i in 2:101){
+  Lxm_mex[i]<- lxm_mex[i+1]+1/2*(lxm_mex[i]-lxm_mex[i+1])
+  Lxm_coa[i]<- lxm_coa[i+1]+1/2*(lxm_coa[i]-lxm_coa[i+1])
+  Lxm_sina[i]<- lxm_sina[i+1]+1/2*(lxm_sina[i]-lxm_sina[i+1])}
+Lxm_mex[101]<-0
+Lxm_coa[101]<-0
+Lxm_sina[101]<-0
+
+Txm_mex<-numeric(101)
+Txm_coa<-numeric(101)
+Txm_sina<-numeric(101)
+for(i in 1:101){
+  Txm_mex[i]<- sum(Lxm_mex[i:101])
+  Txm_coa[i]<- sum(Lxm_coa[i:101])
+  Txm_sina[i]<- sum(Lxm_sina[i:101])}
+
+dxm_mex<-qm_mex*lxm_mex
+dxm_coa<-qm_coa*lxm_coa
+dxm_sina<-qm_sina*lxm_sina
+exm_mex <- Txm_mex/lxm_mex
+exm_coa <- Txm_coa/lxm_coa
+exm_sina <- Txm_sina/lxm_sina
+
+Vidamd<-data.frame(qm_mex,lxm_mex,Lxm_mex,Txm_mex,exm_mex,
+                   qm_coa,lxm_coa,Lxm_coa,Txm_coa,exm_coa,
+                   qm_sina,lxm_sina,Lxm_sina,Txm_sina,exm_sina)
